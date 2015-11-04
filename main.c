@@ -21,8 +21,9 @@ int main (int argc,char *argv[])
 
 	label1 = gtk_label_new("*PIANO TILES GAME*");
 	gtk_widget_set_size_request(label1,400,50);
-
+	
 	b1 = gtk_button_new_with_label(" ");
+	gtk_widget_set_usize(GTK_WIDGET(b1),30,120);
 	b2 = gtk_button_new_with_label(" ");
 	b3 = gtk_button_new_with_label(" ");
  	b4 = gtk_button_new_with_label(" ");
