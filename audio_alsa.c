@@ -230,7 +230,7 @@ int pcm_write(struct pcm *pcm, void *data, unsigned count)
         if (ioctl(pcm->fd, SNDRV_PCM_IOCTL_WRITEI_FRAMES, &x)) {
             pcm->running = 0;
             if (errno == EPIPE) {
-                    /* we failed to make our window -- try to restart */
+                /* we failed to make our window -- try to restart */
                 pcm->underruns++;
                 continue;
             }
@@ -240,7 +240,7 @@ int pcm_write(struct pcm *pcm, void *data, unsigned count)
     }
 }
 
-int pcm_close(struct pcm *pcm) 
+int pcm_close(struct pcm *pcm)
 {
     if (pcm->fd < 0)
         return oops(pcm, 0, "not open");
@@ -312,7 +312,6 @@ int pcm_open(struct pcm *pcm)
         oops(pcm, errno, "cannot set sw params");
         goto fail;
     }
-
     //pcm->buffer_size = 4096;
     pcm->buffer_size = bufsz / 2;
     pcm->underruns = 0;
