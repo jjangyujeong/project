@@ -287,12 +287,11 @@ int pcm_open(struct pcm *pcm)
 
     param_set_int(&params, SNDRV_PCM_HW_PARAM_PERIODS, 2);
     param_set_int(&params, SNDRV_PCM_HW_PARAM_RATE, 44100);
-b
+
     if (ioctl(pcm->fd, SNDRV_PCM_IOCTL_HW_PARAMS, &params)) {
         oops(pcm, errno, "cannot set hw params");
         goto fail;
     }
-
     param_dump(&params);
 
     memset(&sparams, 0, sizeof(sparams));
