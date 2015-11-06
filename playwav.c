@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -7,6 +6,8 @@
 #include <string.h>
 
 #include "audio.h"
+
+/* http://ccrma.stanford.edu/courses/422/projects/WaveFormat/ */
 
 #define ID_RIFF 0x46464952
 #define ID_WAVE 0x45564157
@@ -120,5 +121,3 @@ int main(int argc, char **argv)
 
     return play_wav(argv[1]);
 }
-
-
