@@ -69,7 +69,7 @@ int play_file(unsigned rate, unsigned channels, int fd, unsigned count)
 
     pcm_close(pcm);
     return 0;
-    
+
 fail:
     fprintf(stderr,"pcm error: %s\n", pcm_error(pcm));
     return -1;

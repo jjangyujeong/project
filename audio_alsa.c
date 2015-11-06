@@ -237,7 +237,7 @@ int pcm_write(struct pcm *pcm, void *data, unsigned count)
             return oops(pcm, errno, "cannot write stream data");
         }
         return 0;
-    }   
+    }
 }
 
 int pcm_close(struct pcm *pcm) 
@@ -252,7 +252,7 @@ int pcm_close(struct pcm *pcm)
     return 0;
 }
 
-int pcm_open(struct pcm *pcm) 
+int pcm_open(struct pcm *pcm)
 {
     struct snd_pcm_info info;
     struct snd_pcm_hw_params params;
@@ -270,6 +270,7 @@ int pcm_open(struct pcm *pcm)
         oops(pcm, errno, "cannot get info - %s");
         goto fail;
     }
+
     info_dump(&info);
 
     param_init(&params);
