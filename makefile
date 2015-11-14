@@ -1,2 +1,9 @@
-main: main.c
-	gcc `pkg-config --cflags gtk+-2.0` -o main main.c -Wall `pkg-config --libs gtk+-2.0`
+CFLAGS := -g -Wall -O2
+
+all: playwav
+
+playwav: audio_alsa.c playwav.c
+	gcc $(CFLAGS) -o playwav playwav.c audio_alsa.c
+
+clean:
+	rm -f playwav *~
