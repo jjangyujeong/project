@@ -1,5 +1,7 @@
 #include <stdio.h>
 #define AAA 100
+#define BBB 200
+
 int main(int argc, char argv[])
 {
 	printf("please Enter wav files\n");
