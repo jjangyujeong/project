@@ -2,7 +2,7 @@
 
 int main(int argc, char argv[])
 {
- 	playsound();
+ 	playsound(3);
  	return 0;
 }
 

@@ -1,15 +1,33 @@
 #include <stdio.h>
 
-void playsound()
+void playsound(int num)
 {
-        //printf("please Enter wav files\n");
+
+	printf("Please select a music (1~5)");
+	
         printf("Converting mp3 files to wav files\n");
-        system("mpg123 -w allday.wav allday.mp3");
-        printf("Playing wav files\n");
-        //printf("HAHAHA\n");
-        system("aplay allday.wav");
-        //system("aplay test.wav");
+	//system("mpg123 -w *.wav *.mp3");
+	if(num==1)
+	{
+		system("aplay 1.wav");
+	}
+	else if(num==2)
+	{
+	        system("aplay 2.wav");
+	}
+	else if(num==3)
+        {
+                system("aplay 3.wav");
+        }
+	else if(num==4)
+        {
+                system("aplay 4.wav");
+        }
+	else if(num==5)
+        {
+                system("aplay 5.wav");
+        }
 
-
+	 printf("Playing wav files\n");
 }
 
