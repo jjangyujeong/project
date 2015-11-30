@@ -1,14 +1,15 @@
-DIRS = lib apps
-.PHONY: all clean
+CC = gcc
+CFLAGS = -g -Wall
+OUTPUT = libfuncs.a
+OBJFILES = playsound.o
+AR = ar
+.PHONY: clean
 
-all:
-	@for d in $(DIRS); \
-	do \
-		$(MAKE) -C $$d; \
-	done
+$(OUTPUT): $(OBJFILES)
+	$(AR) rv $(OUTPUT) $(OBJFILES)
+
+%.o: %.c
+	$(CC) -c $< -o $@
 
 clean:
-	@for d in $(DIRS); \
-	do \
-		$(MAKE) -C $$d clean; \
-	done
+	rm -f $(OBJFILES) $(OUTPUT)

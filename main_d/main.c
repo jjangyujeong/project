@@ -125,6 +125,9 @@ void buttonClick()
 
 int main (int argc,char *argv[])
 {
+
+	printf("Playing Music..\n");
+	playsound(2);
 	GtkWidget* window;
 	GtkWidget* label1;
 //	GtkWidget *bScore,*bMusic;

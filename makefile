@@ -1,9 +1,17 @@
-CFLAGS := -g -Wall -O2
+DIRS = sound_d main_d
+.PHONY: all clean
 
-all: playwav
-
-playwav: audio_alsa.c playwav.c
-	gcc $(CFLAGS) -o playwav playwav.c audio_alsa.c
+all:
+	@for d in $(DIRS); \
+	do \
+		$(MAKE) -C $$d; \
+	done
 
 clean:
-	rm -f playwav *~
+	@for d in $(DIRS); \
+	do \
+		$(MAKE) -C $$d clean; \
+	done
+
+
+
