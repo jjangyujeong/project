@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "playsound.h"
 
 GtkWidget *b1, *b2,*b3,*b4,*b5,*b6,*b7,*b8;
 GtkWidget *bScore,*bMusic;
@@ -15,7 +16,7 @@ int stop=0;
 gint on_timer(gpointer data);
 void clear() 
 {
-       
+
         gtk_button_set_label(GTK_BUTTON(b1),""); 
         gtk_button_set_label(GTK_BUTTON(b2),""); 
         gtk_button_set_label(GTK_BUTTON(b3),""); 
@@ -126,8 +127,6 @@ void buttonClick()
 int main (int argc,char *argv[])
 {
 
-	printf("Playing Music..\n");
-	playsound(2);
 	GtkWidget* window;
 	GtkWidget* label1;
 //	GtkWidget *bScore,*bMusic;
@@ -140,10 +139,9 @@ int main (int argc,char *argv[])
 	gtk_init(NULL,NULL);
 	g_timeout_add(1000,ddg,0);
 
-	
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	g_signal_connect(G_OBJECT(window),"destory",G_CALLBACK(gtk_main_quit),NULL);
-	
+
 
 	//-----------------------------------------------------
 	vbox = gtk_vbox_new(TRUE,0);
@@ -152,7 +150,7 @@ int main (int argc,char *argv[])
 
 	label1 = gtk_label_new("*PIANO TILES GAME*");
 	gtk_widget_set_size_request(label1,400,50);
-	
+
 	b1 = gtk_button_new_with_label(" ");
 	gtk_widget_set_usize(GTK_WIDGET(b1),30,120);
 	b2 = gtk_button_new_with_label(" ");
@@ -178,7 +176,7 @@ int main (int argc,char *argv[])
 
 	//--------------------container---------------------
 	gtk_container_add(GTK_CONTAINER(vbox),label1);
-	
+
 	gtk_container_add(GTK_CONTAINER(hbox),b1);
  	gtk_container_add(GTK_CONTAINER(hbox),b2);
  	gtk_container_add(GTK_CONTAINER(hbox),b3);
@@ -189,18 +187,16 @@ int main (int argc,char *argv[])
  	gtk_container_add(GTK_CONTAINER(hbox),b8);
 
 	gtk_container_add(GTK_CONTAINER(vbox),hbox);
-	
+
 	gtk_container_add(GTK_CONTAINER(hbox2),bScore);
 	gtk_container_add(GTK_CONTAINER(hbox2),bMusic);
 	gtk_container_add(GTK_CONTAINER(vbox),hbox2);
-	
+
 	gtk_container_add(GTK_CONTAINER(window),vbox);
 
-	
-
 	gtk_widget_show_all(window);
-	
-	
+
+	playsound(2);
 	gtk_main(); //wait
 	return 0;
 }

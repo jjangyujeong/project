@@ -2,9 +2,8 @@
 
 void playsound(int num)
 {
-
 	printf("Please select a music (1~5)\n");
-        printf("Converting mp3 files to wav files\n");
+        //printf("Converting mp3 files to wav files\n");
 	//system("mpg123 -w *.wav *.mp3");
 	if(num==1)
 	{
