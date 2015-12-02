@@ -61,21 +61,21 @@ gint ddg()
         num = rand()% 8+1;
 
         if(num==1){
-                gtk_button_set_label(GTK_BUTTON(b1),"o");}
+                gtk_button_set_label(GTK_BUTTON(b1),"★");}
         else if(num==2){
-                gtk_button_set_label(GTK_BUTTON(b2),"o");}
+                gtk_button_set_label(GTK_BUTTON(b2),"★");}
         else if(num==3){
-                gtk_button_set_label(GTK_BUTTON(b3),"o");}
+                gtk_button_set_label(GTK_BUTTON(b3),"★");}
         else if(num==4){
-                gtk_button_set_label(GTK_BUTTON(b4),"o");}
+                gtk_button_set_label(GTK_BUTTON(b4),"★");}
         else if(num==5){
-                gtk_button_set_label(GTK_BUTTON(b5),"o");}
+                gtk_button_set_label(GTK_BUTTON(b5),"★");}
         else if(num==6){
-                gtk_button_set_label(GTK_BUTTON(b6),"o");}
+                gtk_button_set_label(GTK_BUTTON(b6),"★");}
         else if(num==7){
-                gtk_button_set_label(GTK_BUTTON(b7),"o");}
+                gtk_button_set_label(GTK_BUTTON(b7),"★");}
         else{
-                gtk_button_set_label(GTK_BUTTON(b8),"o");}
+                gtk_button_set_label(GTK_BUTTON(b8),"★");}
 
 
         return TRUE;
@@ -193,10 +193,10 @@ int main (int argc,char *argv[])
 	hbox3 = gtk_hbox_new(TRUE,0);
 
 	label1 = gtk_label_new("*PIANO TILES GAME*");
-	gtk_widget_set_size_request(label1,400,50);
+	gtk_widget_set_size_request(label1,400,10);
 
 	b1 = gtk_button_new_with_label(" ");
-	gtk_widget_set_usize(GTK_WIDGET(b1),30,120);
+	gtk_widget_set_usize(GTK_WIDGET(b1),30,100);
 	b2 = gtk_button_new_with_label(" ");
 	b3 = gtk_button_new_with_label(" ");
  	b4 = gtk_button_new_with_label(" ");
@@ -206,12 +206,8 @@ int main (int argc,char *argv[])
 	b8 = gtk_button_new_with_label(" ");
 
 	s1 = gtk_button_new_with_label("step 1");
-	gtk_widget_set_usize(GTK_WIDGET(s1),100,20);
 	s2 = gtk_button_new_with_label("step 2");
-	 gtk_widget_set_usize(GTK_WIDGET(s2),100,20);
-
 	s3 = gtk_button_new_with_label("step 3");
-	 gtk_widget_set_usize(GTK_WIDGET(s3),100,20);
 
 
 	bScore = gtk_label_new("Score");
@@ -237,7 +233,6 @@ int main (int argc,char *argv[])
         gtk_container_add(GTK_CONTAINER(hbox),s3);
         gtk_container_add(GTK_CONTAINER(vbox),hbox);
 
-
 	gtk_container_add(GTK_CONTAINER(hbox3),b1);
         gtk_container_add(GTK_CONTAINER(hbox3),b2);
         gtk_container_add(GTK_CONTAINER(hbox3),b3);
@@ -251,6 +246,8 @@ int main (int argc,char *argv[])
 	gtk_container_add(GTK_CONTAINER(hbox2),bScore);
         gtk_container_add(GTK_CONTAINER(hbox2),out);
         gtk_container_add(GTK_CONTAINER(vbox),hbox2);
+
+	 
 
 	gtk_container_add(GTK_CONTAINER(window),vbox);
 
