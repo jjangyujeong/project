@@ -13,15 +13,9 @@ int num=0; //random ddg number
 int score = 0;
 int push=0;
 int stop=0;
-gint on_timer(gpointer data);
 
-void *play(void *arg)
-{
-	int flag;
-	flag = playsound(2);
-	printf("%d\n",flag);
-}
-void clear()
+gint on_timer(gpointer data);
+void clear() 
 {
 
         gtk_button_set_label(GTK_BUTTON(b1),""); 
@@ -99,7 +93,7 @@ void buttonClick()
                 push = 7;}
 	else{
                 push = 8;}
-
+	
 	clear();
 	setAnswer();
 }
@@ -142,17 +136,7 @@ int main (int argc,char *argv[])
 	GtkWidget* vbox;
 	gtk_init(&argc, &argv);
 
-	int result;
-	pthread_t mythread;
-
-	result = pthread_create(&mythread, NULL, play, NULL);
-	if(result){
-			perror("pthread_create");
-			exit(1);
-	}
-
-	//pthread_join(mythread,NULL);
-
+//	int i=0;
 	gtk_init(NULL,NULL);
 	g_timeout_add(1000,ddg,0);
 
@@ -213,7 +197,7 @@ int main (int argc,char *argv[])
 
 	gtk_widget_show_all(window);
 
-	//playsound(2);
+	playsound(2);
 	gtk_main(); //wait
 	return 0;
 }
