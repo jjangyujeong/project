@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <pthread.h>
 
-int playsound(int num)
+void playsound(int num)
 {
 	int flag=0;
 	printf("Please select a music (1~5)\n");
@@ -39,6 +39,6 @@ int playsound(int num)
         }
 
 	printf("Playing wav files\n");
-	return flag;
+
 }
 
