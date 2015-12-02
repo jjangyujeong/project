@@ -196,7 +196,7 @@ int main (int argc,char *argv[])
 
 	gtk_widget_show_all(window);
 
-	playsound(2);
+	//playsound(2);
 	gtk_main(); //wait
 	return 0;
 }
