@@ -120,7 +120,7 @@ void buttonClick()
 	else{
                 gtk_button_set_label(GTK_BUTTON(b8),"o");}
 
-	
+
 	return TRUE;
 }*/
 
