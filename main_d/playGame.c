@@ -14,43 +14,33 @@ int score = 0;
 int push=0;
 int stop=0;
 
+
 int song = 0;
 int start = 0;
 
+
+
 gint on_timer(gpointer data);
 
-struct thread_args{
-	int flag;
-};
 
 void *play(void *arg)
 {
-	//int flag;
-	//flag = playsound(2);
-	playsound(2);
-	//printf("%d\n",flag);
-
-	int myflag = 0;
-	struct thread_args *myarg = (struct thread_args *)arg;
-	myflag = myarg->flag;
-
-	if(myflag == 1){
-	 playsound(1);}
-	else if(myflag==2){
-	 playsound(2);}
-	else{
-	 playsound(3);}
+	
+	playsound(1);
+	
 }
 void clear()
 {
-        gtk_button_set_label(GTK_BUTTON(b1),"");
-        gtk_button_set_label(GTK_BUTTON(b2),"");
-        gtk_button_set_label(GTK_BUTTON(b3),"");
-        gtk_button_set_label(GTK_BUTTON(b4),"");
-        gtk_button_set_label(GTK_BUTTON(b5),"");
-        gtk_button_set_label(GTK_BUTTON(b6),"");
-        gtk_button_set_label(GTK_BUTTON(b7),"");
-        gtk_button_set_label(GTK_BUTTON(b8),"");
+
+        gtk_button_set_label(GTK_BUTTON(b1),""); 
+        gtk_button_set_label(GTK_BUTTON(b2),""); 
+        gtk_button_set_label(GTK_BUTTON(b3),""); 
+        gtk_button_set_label(GTK_BUTTON(b4),""); 
+        gtk_button_set_label(GTK_BUTTON(b5),""); 
+        gtk_button_set_label(GTK_BUTTON(b6),""); 
+        gtk_button_set_label(GTK_BUTTON(b7),""); 
+        gtk_button_set_label(GTK_BUTTON(b8),""); 
+
 }
 
 gint ddg()
@@ -76,53 +66,12 @@ gint ddg()
         else{
                 gtk_button_set_label(GTK_BUTTON(b8),"o");}
 
+
         return TRUE;
 	if(stop==1) return FALSE;
 
 }
 
-void music1()
-{
-	int result;
-        pthread_t mythread;
-	struct thread_args range[1];
-
-	range[0].flag=1;
-      	result = pthread_create(&mythread, NULL, play,&range[0]);
-        if(result){
-                        perror("pthread_create");
-                        exit(1);}
-	g_timeout_add(2000,ddg,0);
-}
-
-void music2()
-{
-	int result;
-        pthread_t mythread;
-        struct thread_args range[1];
-
-        range[0].flag=2;
-        result = pthread_create(&mythread, NULL, play,&range[0]);
-        if(result){
-                        perror("pthread_create");
-                        exit(1);}
-        g_timeout_add(1500,ddg,0);
-}
-
-void music3()
-{
-	  int result;
-        pthread_t mythread;
-        struct thread_args range[1];
-
-        range[0].flag=3;
-        result = pthread_create(&mythread, NULL, play,&range[0]);
-        if(result){
-                        perror("pthread_create");
-                        exit(1);}
-        g_timeout_add(1500,ddg,0);
-
-}
 
 void setAnswer()
 {
@@ -131,7 +80,7 @@ void setAnswer()
 		num=0;
 		score++;
 		sprintf(buf,"Score is %d",score);
-		gtk_label_set_text(GTK_LABEL(bScore),buf);
+		gtk_label_set_text(GTK_LABEL(bScore),buf);		
 	}
 	else
 	{
@@ -163,13 +112,14 @@ void buttonClick()
 	setAnswer();
 }
 
+
+
 int main (int argc,char *argv[])
 {
 
 	GtkWidget* window;
 	GtkWidget* label1;
 
-	GtkWidget *hbox;
 	GtkWidget *hbox2;
 	GtkWidget *hbox3;
 	GtkWidget* vbox;
@@ -185,8 +135,9 @@ int main (int argc,char *argv[])
 	}
 
 	//pthread_join(mythread,NULL);
+
 	gtk_init(NULL,NULL);
-//	g_timeout_add(1000,ddg,0);
+	g_timeout_add(1000,ddg,0);
 
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	g_signal_connect(G_OBJECT(window),"destory",G_CALLBACK(gtk_main_quit),NULL);
@@ -194,7 +145,6 @@ int main (int argc,char *argv[])
 
 	//-----------------------------------------------------
 	vbox = gtk_vbox_new(TRUE,0);
-	hbox = gtk_hbox_new(TRUE,0);
 	hbox2 = gtk_hbox_new(TRUE,0);
 	hbox3 = gtk_hbox_new(TRUE,0);
 
@@ -211,14 +161,6 @@ int main (int argc,char *argv[])
  	b7 = gtk_button_new_with_label(" ");
 	b8 = gtk_button_new_with_label(" ");
 
-	s1 = gtk_button_new_with_label("step 1");
-	gtk_widget_set_usize(GTK_WIDGET(s1),100,20);
-	s2 = gtk_button_new_with_label("step 2");
-	 gtk_widget_set_usize(GTK_WIDGET(s2),100,20);
-
-	s3 = gtk_button_new_with_label("step 3");
-	 gtk_widget_set_usize(GTK_WIDGET(s3),100,20);
-
 
 	bScore = gtk_label_new("Score");
 	out = gtk_button_new_with_label("exit");
@@ -231,19 +173,11 @@ int main (int argc,char *argv[])
 	g_signal_connect(G_OBJECT(b6),"clicked",G_CALLBACK(buttonClick),NULL);
 	g_signal_connect(G_OBJECT(b7),"clicked",G_CALLBACK(buttonClick),NULL);
 	g_signal_connect(G_OBJECT(b8),"clicked",G_CALLBACK(buttonClick),NULL);
-
-	//g_signal_connect(G_OBJECT(exit),"clicked",G_CALLBACK(musicSelect),NULL);
-	g_signal_connect(G_OBJECT(s1),"clicked",G_CALLBACK(music1),NULL);
-	g_signal_connect(G_OBJECT(s2),"clicked",G_CALLBACK(music2),NULL);
-	g_signal_connect(G_OBJECT(s3),"clicked",G_CALLBACK(music3),NULL);	
-
+	
+		
 	//--------------------container---------------------
 	gtk_container_add(GTK_CONTAINER(vbox),label1);
 
-	gtk_container_add(GTK_CONTAINER(hbox),s1);
-        gtk_container_add(GTK_CONTAINER(hbox),s2);
-        gtk_container_add(GTK_CONTAINER(hbox),s3);
-        gtk_container_add(GTK_CONTAINER(vbox),hbox);
 
 
 	gtk_container_add(GTK_CONTAINER(hbox3),b1);
