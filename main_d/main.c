@@ -5,14 +5,20 @@
 #include "playsound.h"
 #include <pthread.h>
 
-GtkWidget *b1, *b2,*b3,*b4,*b5,*b6,*b7,*b8;
-GtkWidget *bScore,*bMusic;
+GtkWidget *b1, *b2,*b3,*b4,*b5,*b6,*b7,*b8, *music;
+GtkWidget *bScore;
 
 char buf[100];
 int num=0; //random ddg number
 int score = 0;
 int push=0;
 int stop=0;
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 9f0b54ad4159e4eb58463293b670ed92b366461b
 gint on_timer(gpointer data);
 
 void *play(void *arg)
@@ -81,8 +87,7 @@ void setAnswer()
 }
 void buttonClick()
 {
- // gtk_label_set_text(GTK_LABEL(bScore),"dddd");
-
+ 
 	if(num==1){
 		push = 1;}
 	else if(num==2){
@@ -103,8 +108,8 @@ void buttonClick()
 	clear();
 	setAnswer();
 }
-
-/*gint ddg()
+/*
+gint ddg()
 {
 	clear();
 	srand((unsigned) time(0));
@@ -136,12 +141,13 @@ int main (int argc,char *argv[])
 
 	GtkWidget* window;
 	GtkWidget* label1;
-//	GtkWidget *bScore,*bMusic;
+
 	GtkWidget *hbox;
 	GtkWidget *hbox2;
 	GtkWidget* vbox;
 	gtk_init(&argc, &argv);
 
+<<<<<<< HEAD
 	int result;
 	pthread_t mythread;
 
@@ -152,6 +158,8 @@ int main (int argc,char *argv[])
 	}
 
 	//pthread_join(mythread,NULL);
+=======
+>>>>>>> 9f0b54ad4159e4eb58463293b670ed92b366461b
 
 	gtk_init(NULL,NULL);
 	g_timeout_add(1000,ddg,0);
@@ -179,8 +187,8 @@ int main (int argc,char *argv[])
 	b8 = gtk_button_new_with_label(" ");
 
 	bScore = gtk_label_new("Score");
-	bMusic = gtk_label_new("Music");
-
+	//bMusic = gtk_label_new("Music");
+	music = gtk_button_new_with_label("Music!");
 
 	g_signal_connect(G_OBJECT(b1),"clicked",G_CALLBACK(buttonClick),NULL);
 	g_signal_connect(G_OBJECT(b2),"clicked",G_CALLBACK(buttonClick),NULL);
@@ -206,14 +214,14 @@ int main (int argc,char *argv[])
 	gtk_container_add(GTK_CONTAINER(vbox),hbox);
 
 	gtk_container_add(GTK_CONTAINER(hbox2),bScore);
-	gtk_container_add(GTK_CONTAINER(hbox2),bMusic);
+	gtk_container_add(GTK_CONTAINER(hbox2),music);
 	gtk_container_add(GTK_CONTAINER(vbox),hbox2);
 
 	gtk_container_add(GTK_CONTAINER(window),vbox);
 
 	gtk_widget_show_all(window);
 
-	//playsound(2);
+//	playsound(2);
 	gtk_main(); //wait
 	return 0;
 }
