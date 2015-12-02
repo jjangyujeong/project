@@ -13,32 +13,25 @@ int num=0; //random ddg number
 int score = 0;
 int push=0;
 int stop=0;
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 9f0b54ad4159e4eb58463293b670ed92b366461b
 gint on_timer(gpointer data);
 
 void *play(void *arg)
 {
-	int flag;
-	flag = playsound(2);
-	printf("%d\n",flag);
+	//int flag;
+	//flag = playsound(2);
+	playsound(2);
+	//printf("%d\n",flag);
 }
 void clear()
 {
-
-        gtk_button_set_label(GTK_BUTTON(b1),""); 
-        gtk_button_set_label(GTK_BUTTON(b2),""); 
-        gtk_button_set_label(GTK_BUTTON(b3),""); 
-        gtk_button_set_label(GTK_BUTTON(b4),""); 
-        gtk_button_set_label(GTK_BUTTON(b5),""); 
-        gtk_button_set_label(GTK_BUTTON(b6),""); 
-        gtk_button_set_label(GTK_BUTTON(b7),""); 
-        gtk_button_set_label(GTK_BUTTON(b8),""); 
-
+        gtk_button_set_label(GTK_BUTTON(b1),"");
+        gtk_button_set_label(GTK_BUTTON(b2),"");
+        gtk_button_set_label(GTK_BUTTON(b3),"");
+        gtk_button_set_label(GTK_BUTTON(b4),"");
+        gtk_button_set_label(GTK_BUTTON(b5),"");
+        gtk_button_set_label(GTK_BUTTON(b6),"");
+        gtk_button_set_label(GTK_BUTTON(b7),"");
+        gtk_button_set_label(GTK_BUTTON(b8),"");
 }
 
 gint ddg()
@@ -147,7 +140,6 @@ int main (int argc,char *argv[])
 	GtkWidget* vbox;
 	gtk_init(&argc, &argv);
 
-<<<<<<< HEAD
 	int result;
 	pthread_t mythread;
 
@@ -158,8 +150,6 @@ int main (int argc,char *argv[])
 	}
 
 	//pthread_join(mythread,NULL);
-=======
->>>>>>> 9f0b54ad4159e4eb58463293b670ed92b366461b
 
 	gtk_init(NULL,NULL);
 	g_timeout_add(1000,ddg,0);
