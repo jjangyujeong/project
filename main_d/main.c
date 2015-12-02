@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "playsound.h"
+#include <pthread.h>
 
 GtkWidget *b1, *b2,*b3,*b4,*b5,*b6,*b7,*b8,*out;
 GtkWidget *bScore,*s1,*s2,*s3;
@@ -12,12 +13,22 @@ int num=0; //random ddg number
 int score = 0;
 int push=0;
 int stop=0;
+<<<<<<< HEAD
+=======
 
 int song = 0;
 int start = 0;
 
+>>>>>>> 9f0b54ad4159e4eb58463293b670ed92b366461b
 gint on_timer(gpointer data);
-void clear() 
+
+void *play(void *arg)
+{
+	int flag;
+	flag = playsound(2);
+	printf("%d\n",flag);
+}
+void clear()
 {
 
         gtk_button_set_label(GTK_BUTTON(b1),""); 
@@ -99,7 +110,7 @@ void buttonClick()
                 push = 7;}
 	else{
                 push = 8;}
-	
+
 	clear();
 	setAnswer();
 }
@@ -118,6 +129,19 @@ int main (int argc,char *argv[])
 	GtkWidget* vbox;
 	gtk_init(&argc, &argv);
 
+<<<<<<< HEAD
+	int result;
+	pthread_t mythread;
+
+	result = pthread_create(&mythread, NULL, play, NULL);
+	if(result){
+			perror("pthread_create");
+			exit(1);
+	}
+
+	//pthread_join(mythread,NULL);
+=======
+>>>>>>> 9f0b54ad4159e4eb58463293b670ed92b366461b
 
 	gtk_init(NULL,NULL);
 	g_timeout_add(1000,ddg,0);
