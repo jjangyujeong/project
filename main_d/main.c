@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "playsound.h"
 
-GtkWidget *b1, *b2,*b3,*b4,*b5,*b6,*b7,*b8, *music;
+GtkWidget *b1, *b2,*b3,*b4,*b5,*b6,*b7,*b8,*out;
 GtkWidget *bScore;
 
 char buf[100];
@@ -13,7 +13,8 @@ int score = 0;
 int push=0;
 int stop=0;
 
-
+int song = 0;
+int start = 0;
 
 gint on_timer(gpointer data);
 void clear() 
@@ -59,13 +60,18 @@ gint ddg()
 
 }
 
+/*void musicSelect()
+{
+	
+}*/
+
 void setAnswer()
 {
 	if(num==push)
 	{
 		num=0;
 		score++;
-		sprintf(buf,"Score %d!",score);
+		sprintf(buf,"Score is %d",score);
 		gtk_label_set_text(GTK_LABEL(bScore),buf);		
 	}
 	else
@@ -97,33 +103,8 @@ void buttonClick()
 	clear();
 	setAnswer();
 }
-/*
-gint ddg()
-{
-	clear();
-	srand((unsigned) time(0));
-	num = rand()% 8+1;
-
-	if(num==1){
-		gtk_button_set_label(GTK_BUTTON(b1),"o");}
-	else if(num==2){
-		gtk_button_set_label(GTK_BUTTON(b2),"o");}
-	else if(num==3){
-                gtk_button_set_label(GTK_BUTTON(b3),"o");}
-	else if(num==4){
-                gtk_button_set_label(GTK_BUTTON(b4),"o");}
-	else if(num==5){
-                gtk_button_set_label(GTK_BUTTON(b5),"o");}
-	else if(num==6){
-                gtk_button_set_label(GTK_BUTTON(b6),"o");}
-	else if(num==7){
-                gtk_button_set_label(GTK_BUTTON(b7),"o");}
-	else{
-                gtk_button_set_label(GTK_BUTTON(b8),"o");}
 
 
-	return TRUE;
-}*/
 
 int main (int argc,char *argv[])
 {
@@ -163,8 +144,7 @@ int main (int argc,char *argv[])
 	b8 = gtk_button_new_with_label(" ");
 
 	bScore = gtk_label_new("Score");
-	//bMusic = gtk_label_new("Music");
-	music = gtk_button_new_with_label("Music!");
+	out = gtk_button_new_with_label("exit");
 
 	g_signal_connect(G_OBJECT(b1),"clicked",G_CALLBACK(buttonClick),NULL);
 	g_signal_connect(G_OBJECT(b2),"clicked",G_CALLBACK(buttonClick),NULL);
@@ -174,7 +154,8 @@ int main (int argc,char *argv[])
 	g_signal_connect(G_OBJECT(b6),"clicked",G_CALLBACK(buttonClick),NULL);
 	g_signal_connect(G_OBJECT(b7),"clicked",G_CALLBACK(buttonClick),NULL);
 	g_signal_connect(G_OBJECT(b8),"clicked",G_CALLBACK(buttonClick),NULL);
-
+	
+	//g_signal_connect(G_OBJECT(exit),"clicked",G_CALLBACK(musicSelect),NULL);
 	//--------------------container---------------------
 	gtk_container_add(GTK_CONTAINER(vbox),label1);
 
@@ -190,7 +171,7 @@ int main (int argc,char *argv[])
 	gtk_container_add(GTK_CONTAINER(vbox),hbox);
 
 	gtk_container_add(GTK_CONTAINER(hbox2),bScore);
-	gtk_container_add(GTK_CONTAINER(hbox2),music);
+	gtk_container_add(GTK_CONTAINER(hbox2),out);
 	gtk_container_add(GTK_CONTAINER(vbox),hbox2);
 
 	gtk_container_add(GTK_CONTAINER(window),vbox);
