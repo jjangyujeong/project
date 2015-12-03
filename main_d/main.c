@@ -25,10 +25,10 @@ struct thread_args{
 
 void *play(void *arg)
 {
-	
 	int myflag = 0;
 	struct thread_args *myarg = (struct thread_args *)arg;
 	myflag = myarg->flag;
+
 
 	if(myflag == 1){
 	 playsound(1);}
@@ -37,8 +37,8 @@ void *play(void *arg)
 	else{
 	 playsound(3);}
 
-        return NULL;
-}
+        return NULL;}
+
 void clear()
 {
         gtk_button_set_label(GTK_BUTTON(b1),"");
@@ -89,7 +89,8 @@ void music1()
 	struct thread_args range[1];
 
 	range[0].flag=1;
-      	result = pthread_create(&mythread, NULL, play,&range[0]);
+      	result = pthread_create(&mythread, NULL, play, &range[0]);
+
         if(result){
                         perror("pthread_create");
                         exit(1);}
@@ -122,7 +123,6 @@ void music3()
                         perror("pthread_create");
                         exit(1);}
         g_timeout_add(500,ddg,0);
-
 }
 
 void setAnswer()
@@ -136,13 +136,14 @@ void setAnswer()
 	}
 	else if(num!=push)
 	{
+
 		stop=10;
 		printf("%d",stop);
 	}
 }
+
 void buttonClick()
 {
- 
 	if(num==1){
 		push = 1;}
 	else if(num==2){
@@ -166,7 +167,6 @@ void buttonClick()
 
 int main (int argc,char *argv[])
 {
-
 	GtkWidget* window;
 
 	GtkWidget *hbox;
@@ -176,11 +176,10 @@ int main (int argc,char *argv[])
 	gtk_init(&argc, &argv);
 
 	gtk_init(NULL,NULL);
-	
+
 
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	g_signal_connect(G_OBJECT(window),"destory",G_CALLBACK(gtk_main_quit),NULL);
-
 
 	//-----------------------------------------------------
 	vbox = gtk_vbox_new(TRUE,0);
@@ -221,7 +220,7 @@ int main (int argc,char *argv[])
 
 	g_signal_connect(G_OBJECT(s1),"clicked",G_CALLBACK(music1),NULL);
 	g_signal_connect(G_OBJECT(s2),"clicked",G_CALLBACK(music2),NULL);
-	g_signal_connect(G_OBJECT(s3),"clicked",G_CALLBACK(music3),NULL);	
+	g_signal_connect(G_OBJECT(s3),"clicked",G_CALLBACK(music3),NULL);
 
 	//--------------------container---------------------
 	gtk_container_add(GTK_CONTAINER(vbox),label1);
@@ -245,11 +244,11 @@ int main (int argc,char *argv[])
         gtk_container_add(GTK_CONTAINER(hbox2),out);
         gtk_container_add(GTK_CONTAINER(vbox),hbox2);
 
-	 
 
 	gtk_container_add(GTK_CONTAINER(window),vbox);
 	gtk_widget_show_all(window);
 	gtk_main(); //wait
+
 
 	return 0;
 }
