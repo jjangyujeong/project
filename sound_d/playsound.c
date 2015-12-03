@@ -2,7 +2,6 @@
 
 void playsound(int num)
 {
-<<<<<<< HEAD
         //int flag=0;
         printf("Please select a music (1~3)\n");
         //printf("mod\n");
@@ -28,21 +27,4 @@ void playsound(int num)
 
 
         printf("Playing wav files\n");
-//      return flag;
-=======
-	
-	if(num==1)
-	{
-		system("aplay 1.wav");
-	}
-	else if(num==2)
-	{
-		system("aplay 2.wav");
-	}
-	else
-        {
-                system("aplay 3.wav");
-        }
-	
->>>>>>> 67f74c2ebe490041dcc15040b144c9c891060699
 }

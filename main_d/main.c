@@ -25,18 +25,14 @@ struct thread_args{
 
 void *play(void *arg)
 {
-<<<<<<< HEAD
-	int myflag=0;
+	//int myflag=0;
 	//int flag;
 	//flag = playsound(2);
 	//playsound(myflag);
 	//printf("%d\n",flag);
 
 	//int myflag = 0;
-=======
-	
 	int myflag = 0;
->>>>>>> 67f74c2ebe490041dcc15040b144c9c891060699
 	struct thread_args *myarg = (struct thread_args *)arg;
 	myflag = myarg->flag;
 
@@ -145,11 +141,8 @@ void setAnswer()
 	}
 	else
 	{
-<<<<<<< HEAD
 		stop=1;
-=======
 		return;
->>>>>>> 67f74c2ebe490041dcc15040b144c9c891060699
 	}
 }
 
@@ -188,8 +181,8 @@ int main (int argc,char *argv[])
 	GtkWidget* vbox;
 	gtk_init(&argc, &argv);
 
-	gtk_init(NULL,NULL);
-	
+	//gtk_init(NULL,NULL);
+
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	g_signal_connect(G_OBJECT(window),"destory",G_CALLBACK(gtk_main_quit),NULL);
 
@@ -257,11 +250,10 @@ int main (int argc,char *argv[])
         gtk_container_add(GTK_CONTAINER(hbox2),out);
         gtk_container_add(GTK_CONTAINER(vbox),hbox2);
 
-	 
 
 	gtk_container_add(GTK_CONTAINER(window),vbox);
 	gtk_widget_show_all(window);
 	gtk_main(); //wait
 
-	
+
 }
