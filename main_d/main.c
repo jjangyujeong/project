@@ -12,13 +12,11 @@ GtkWidget *bScore,*s1,*s2,*s3,*label1;
 char buf[100];
 int num=0; //random ddg number
 int score = 0;
-int push=0;
-int stop=0;
+int push=0; // check button
+int stop=0; //game over
 
-int song = 0;
-int start = 0;
-
-int flag = 0;
+int bb = 0; //bonus
+int flag = 0; //song select
 
 gint on_timer(gpointer data);
 
@@ -50,12 +48,14 @@ void clear()
 
 int ddg()
 {
+	bb++; //cycle 10
         clear();
         srand((unsigned) time(0));
         num = rand()% 8+1;
 
 	if(stop==1){
 		stop=0;
+		bb=0;
 		sprintf(buf, "!!!GAME OVER!!!");
      		gtk_label_set_text(GTK_LABEL(label1), buf);
 		return 0;
@@ -77,6 +77,7 @@ int ddg()
                 gtk_button_set_label(GTK_BUTTON(b7),"★");}
         else{
                 gtk_button_set_label(GTK_BUTTON(b8),"★");}
+	
 	if(stop!=10){
 		return 1;
 	}
@@ -89,11 +90,13 @@ void music1()
         pthread_t mythread;
 	flag=1;
       	result = pthread_create(&mythread, NULL, play, NULL);
-
+	
         if(result){
                         perror("pthread_create");
                         exit(1);}
 	g_timeout_add(2000,ddg,0);
+	sprintf(buf, "slow life");
+     	gtk_label_set_text(GTK_LABEL(out), buf);
 }
 
 void music2()
@@ -106,6 +109,8 @@ void music2()
                         perror("pthread_create");
                         exit(1);}
         g_timeout_add(1000,ddg,0);
+	sprintf(buf, "ppo ppo ppo");
+     	gtk_label_set_text(GTK_LABEL(out), buf);
 }
 
 void music3()
@@ -118,16 +123,28 @@ void music3()
                         perror("pthread_create");
                         exit(1);}
         g_timeout_add(800,ddg,0);
+	sprintf(buf, "Kartrider");
+     	gtk_label_set_text(GTK_LABEL(out), buf);
 }
 
 void setAnswer()
 {
+	int plus = 0;
 	if(num==push)
 	{
+		if(bb<10 || bb%10!=0){
 		num=0;
 		score++;
 		sprintf(buf,"Score : %d",score);
+		gtk_label_set_text(GTK_LABEL(bScore),buf);}
+		
+		else if(bb>=10 && bb%10 ==0){
+		plus = bonus();
+		num=0;
+		score = plus + score;
+		sprintf(buf,"☆Bonus +%d☆",plus);
 		gtk_label_set_text(GTK_LABEL(bScore),buf);
+		}
 	}
 	else if(num!=push)
 	{
@@ -201,7 +218,7 @@ int main (int argc,char *argv[])
 
 
 	bScore = gtk_label_new("Score");
-	out = gtk_button_new_with_label("exit");
+	out = gtk_label_new("Music");
 
 	g_signal_connect(G_OBJECT(b1),"clicked",G_CALLBACK(buttonClick),NULL);
 	g_signal_connect(G_OBJECT(b2),"clicked",G_CALLBACK(buttonClick),NULL);

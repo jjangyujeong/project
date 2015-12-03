@@ -1,4 +1,4 @@
-DIRS = sound_d main_d
+DIRS = sound_d action_d main_d
 .PHONY: all clean
 
 all:
