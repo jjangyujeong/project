@@ -14,11 +14,8 @@ int score = 0;
 int push=0;
 int stop=0;
 
-
 int song = 0;
 int start = 0;
-
-
 
 gint on_timer(gpointer data);
 
@@ -28,6 +25,7 @@ struct thread_args{
 
 void *play(void *arg)
 {
+	
 	int myflag = 0;
 	struct thread_args *myarg = (struct thread_args *)arg;
 	myflag = myarg->flag;
@@ -38,20 +36,17 @@ void *play(void *arg)
 	 playsound(2);}
 	else{
 	 playsound(3);}
-	
 }
 void clear()
 {
-
-        gtk_button_set_label(GTK_BUTTON(b1),""); 
-        gtk_button_set_label(GTK_BUTTON(b2),""); 
-        gtk_button_set_label(GTK_BUTTON(b3),""); 
-        gtk_button_set_label(GTK_BUTTON(b4),""); 
-        gtk_button_set_label(GTK_BUTTON(b5),""); 
-        gtk_button_set_label(GTK_BUTTON(b6),""); 
-        gtk_button_set_label(GTK_BUTTON(b7),""); 
-        gtk_button_set_label(GTK_BUTTON(b8),""); 
-
+        gtk_button_set_label(GTK_BUTTON(b1),"");
+        gtk_button_set_label(GTK_BUTTON(b2),"");
+        gtk_button_set_label(GTK_BUTTON(b3),"");
+        gtk_button_set_label(GTK_BUTTON(b4),"");
+        gtk_button_set_label(GTK_BUTTON(b5),"");
+        gtk_button_set_label(GTK_BUTTON(b6),"");
+        gtk_button_set_label(GTK_BUTTON(b7),"");
+        gtk_button_set_label(GTK_BUTTON(b8),"");
 }
 
 gint ddg()
@@ -77,10 +72,7 @@ gint ddg()
         else{
                 gtk_button_set_label(GTK_BUTTON(b8),"★");}
 
-
         return TRUE;
-	if(stop==1) return FALSE;
-
 }
 
 void music1()
@@ -95,8 +87,8 @@ void music1()
                         perror("pthread_create");
                         exit(1);}
 	g_timeout_add(2000,ddg,0);
-        	
 }
+
 void music2()
 {
 	int result;
@@ -108,11 +100,12 @@ void music2()
         if(result){
                         perror("pthread_create");
                         exit(1);}
-        g_timeout_add(1500,ddg,0);
+        g_timeout_add(900,ddg,0);
 }
+
 void music3()
 {
-	  int result;
+	int result;
         pthread_t mythread;
         struct thread_args range[1];
 
@@ -121,7 +114,7 @@ void music3()
         if(result){
                         perror("pthread_create");
                         exit(1);}
-        g_timeout_add(1500,ddg,0);
+        g_timeout_add(500,ddg,0);
 
 }
 
@@ -132,12 +125,11 @@ void setAnswer()
 		num=0;
 		score++;
 		sprintf(buf,"Score is %d",score);
-		gtk_label_set_text(GTK_LABEL(bScore),buf);		
+		gtk_label_set_text(GTK_LABEL(bScore),buf);
 	}
 	else
 	{
-		stop=1;
-
+		return;
 	}
 }
 void buttonClick()
@@ -164,8 +156,6 @@ void buttonClick()
 	setAnswer();
 }
 
-
-
 int main (int argc,char *argv[])
 {
 
@@ -178,10 +168,8 @@ int main (int argc,char *argv[])
 	GtkWidget* vbox;
 	gtk_init(&argc, &argv);
 
-
 	gtk_init(NULL,NULL);
-//	g_timeout_add(1000,ddg,0);
-
+	
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	g_signal_connect(G_OBJECT(window),"destory",G_CALLBACK(gtk_main_quit),NULL);
 
@@ -221,10 +209,12 @@ int main (int argc,char *argv[])
 	g_signal_connect(G_OBJECT(b6),"clicked",G_CALLBACK(buttonClick),NULL);
 	g_signal_connect(G_OBJECT(b7),"clicked",G_CALLBACK(buttonClick),NULL);
 	g_signal_connect(G_OBJECT(b8),"clicked",G_CALLBACK(buttonClick),NULL);
-	
+
+
 	g_signal_connect(G_OBJECT(s1),"clicked",G_CALLBACK(music1),NULL);
 	g_signal_connect(G_OBJECT(s2),"clicked",G_CALLBACK(music2),NULL);
 	g_signal_connect(G_OBJECT(s3),"clicked",G_CALLBACK(music3),NULL);	
+
 	//--------------------container---------------------
 	gtk_container_add(GTK_CONTAINER(vbox),label1);
 
@@ -250,12 +240,8 @@ int main (int argc,char *argv[])
 	 
 
 	gtk_container_add(GTK_CONTAINER(window),vbox);
-
 	gtk_widget_show_all(window);
-
 	gtk_main(); //wait
 
 	
-
-	return 0;
 }
