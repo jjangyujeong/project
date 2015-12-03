@@ -25,21 +25,28 @@ struct thread_args{
 
 void *play(void *arg)
 {
+	int myflag=0;
 	//int flag;
 	//flag = playsound(2);
-	playsound(2);
+	//playsound(myflag);
 	//printf("%d\n",flag);
 
-	int myflag = 0;
+	//int myflag = 0;
 	struct thread_args *myarg = (struct thread_args *)arg;
 	myflag = myarg->flag;
 
-	if(myflag == 1){
-	 playsound(1);}
-	else if(myflag==2){
-	 playsound(2);}
-	else{
-	 playsound(3);}
+	if(myflag==1)
+	{
+	 playsound(1);
+	}
+	else if(myflag==2)
+	{
+	 playsound(2);
+	}
+	else if(myflag==3)
+	{
+	 playsound(3);
+	}
 }
 void clear()
 {
@@ -136,12 +143,11 @@ void setAnswer()
 	else
 	{
 		stop=1;
-
 	}
 }
+
 void buttonClick()
 {
- 
 	if(num==1){
 		push = 1;}
 	else if(num==2){
