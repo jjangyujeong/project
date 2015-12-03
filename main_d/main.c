@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "playsound.h"
+#include "bonus.h"
 #include <pthread.h>
 
 GtkWidget *b1, *b2,*b3,*b4,*b5,*b6,*b7,*b8,*out;
@@ -17,27 +18,23 @@ int stop=0;
 int song = 0;
 int start = 0;
 
+int flag = 0;
+
 gint on_timer(gpointer data);
 
-struct thread_args{
-	int flag;
-};
+
 
 void *play(void *arg)
 {
-	int myflag = 0;
-	struct thread_args *myarg = (struct thread_args *)arg;
-	myflag = myarg->flag;
-
-
-	if(myflag == 1){
+	if(flag == 1){
 	 playsound(1);}
-	else if(myflag==2){
+	else if(flag==2){
 	 playsound(2);}
-	else{
+	else if(flag==3){
 	 playsound(3);}
 
-        return NULL;}
+        return NULL;
+}
 
 void clear()
 {
@@ -57,8 +54,9 @@ int ddg()
         srand((unsigned) time(0));
         num = rand()% 8+1;
 
-	if(stop==10){
-		sprintf(buf, "Game Done");
+	if(stop==1){
+		stop=0;
+		sprintf(buf, "!!!GAME OVER!!!");
      		gtk_label_set_text(GTK_LABEL(label1), buf);
 		return 0;
 	}
@@ -89,10 +87,8 @@ void music1()
 {
 	int result;
         pthread_t mythread;
-	struct thread_args range[1];
-
-	range[0].flag=1;
-      	result = pthread_create(&mythread, NULL, play, &range[0]);
+	flag=1;
+      	result = pthread_create(&mythread, NULL, play, NULL);
 
         if(result){
                         perror("pthread_create");
@@ -104,28 +100,24 @@ void music2()
 {
 	int result;
         pthread_t mythread;
-        struct thread_args range[1];
-
-        range[0].flag=2;
-        result = pthread_create(&mythread, NULL, play,&range[0]);
+	flag=2;
+        result = pthread_create(&mythread, NULL, play,NULL);
         if(result){
                         perror("pthread_create");
                         exit(1);}
-        g_timeout_add(900,ddg,0);
+        g_timeout_add(1000,ddg,0);
 }
 
 void music3()
 {
 	int result;
         pthread_t mythread;
-        struct thread_args range[1];
-
-        range[0].flag=3;
-        result = pthread_create(&mythread, NULL, play,&range[0]);
+	flag=3;
+        result = pthread_create(&mythread, NULL, play,NULL);
         if(result){
                         perror("pthread_create");
                         exit(1);}
-        g_timeout_add(500,ddg,0);
+        g_timeout_add(800,ddg,0);
 }
 
 void setAnswer()
@@ -134,15 +126,16 @@ void setAnswer()
 	{
 		num=0;
 		score++;
-		sprintf(buf,"Score is %d",score);
+		sprintf(buf,"Score : %d",score);
 		gtk_label_set_text(GTK_LABEL(bScore),buf);
 	}
 	else if(num!=push)
 	{
 		num=0;
-		stop=10;
+		stop=1;
 	}
 }
+
 
 void buttonClick(GtkWidget *widget)
 {
@@ -223,7 +216,6 @@ int main (int argc,char *argv[])
 	g_signal_connect(G_OBJECT(s1),"clicked",G_CALLBACK(music1),NULL);
 	g_signal_connect(G_OBJECT(s2),"clicked",G_CALLBACK(music2),NULL);
 	g_signal_connect(G_OBJECT(s3),"clicked",G_CALLBACK(music3),NULL);
-
 	//--------------------container---------------------
 	gtk_container_add(GTK_CONTAINER(vbox),label1);
 
