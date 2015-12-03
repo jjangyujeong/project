@@ -57,6 +57,12 @@ int ddg()
         srand((unsigned) time(0));
         num = rand()% 8+1;
 
+	if(stop==10){
+		sprintf(buf, "Game Done");
+     		gtk_label_set_text(GTK_LABEL(label1), buf);
+		return 0;
+	}
+
         if(num==1){
                 gtk_button_set_label(GTK_BUTTON(b1),"★");}
         else if(num==2){
@@ -73,12 +79,9 @@ int ddg()
                 gtk_button_set_label(GTK_BUTTON(b7),"★");}
         else{
                 gtk_button_set_label(GTK_BUTTON(b8),"★");}
-
-//	if(stop==10){
-	//	sprintf(buf, "Game Done");
-     	//	gtk_label_set_text(GTK_LABEL(label1), buf);
-	//	return 0;
-	//}
+	if(stop!=10){
+		return 1;
+	}
 	
 }
 
@@ -136,29 +139,28 @@ void setAnswer()
 	}
 	else if(num!=push)
 	{
-
+		num=0;
 		stop=10;
-		printf("%d",stop);
 	}
 }
 
-void buttonClick()
+void buttonClick(GtkWidget *widget)
 {
-	if(num==1){
+	if(widget == b1){
 		push = 1;}
-	else if(num==2){
+	else if(widget == b2){
                 push = 2;}
-	else if(num==3){
+	else if(widget == b3){
                 push = 3;}
-	else if(num==4){
+	else if(widget == b4){
                 push = 4;}
-	else if(num==5){
+	else if(widget == b5){
                 push = 5;}
-	else if(num==6){
+	else if(widget == b6){
                 push = 6;}
-	else if(num==7){
+	else if(widget == b7){
                 push = 7;}
-	else{
+	else if(widget == b8){
                 push = 8;}
 
 	clear();
