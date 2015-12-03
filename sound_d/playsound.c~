@@ -19,5 +19,8 @@ void playsound(int num)
                 printf("play music numb 3\n");
                 system("aplay 3.wav");
         }
-        printf("haha");
+        else
+       {
+          exit(0);
+       }
 }
