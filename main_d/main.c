@@ -10,6 +10,7 @@ GtkWidget *b1, *b2,*b3,*b4,*b5,*b6,*b7,*b8,*out;
 GtkWidget *bScore,*s1,*s2,*s3,*label1;
 
 char buf[100];
+char buf2[100];
 int num=0; //random ddg number
 int score = 0;
 int push=0; // check button
@@ -18,6 +19,9 @@ int stop=0; //game over
 int bb = 0; //bonus
 int flag = 0; //song select
 
+int end1=0;
+int end2=0;
+int end3=0;//end timer
 gint on_timer(gpointer data);
 
 
@@ -48,6 +52,13 @@ void clear()
 
 int ddg()
 {
+	if(flag==1){
+		end1++;}
+	else if(flag==2){
+		end2++;}
+	else if(flag==3){
+		end3++;}
+
 	bb++; //cycle 10
         clear();
         srand((unsigned) time(0));
@@ -57,6 +68,17 @@ int ddg()
 		stop=0;
 		bb=0;
 		sprintf(buf, "!!!GAME OVER!!!");
+     		gtk_label_set_text(GTK_LABEL(label1), buf);
+		return 0;
+	}
+	if(end1==54 || end2==34 || end3==99)
+	{
+		stop=0;
+		bb=0;
+		end1=0;
+		end2=0;
+		end3=0;
+		sprintf(buf, "!!!GAME CLEAR!!!");
      		gtk_label_set_text(GTK_LABEL(label1), buf);
 		return 0;
 	}
@@ -97,6 +119,8 @@ void music1()
 	g_timeout_add(2000,ddg,0);
 	sprintf(buf, "slow life");
      	gtk_label_set_text(GTK_LABEL(out), buf);
+	sprintf(buf2, "*PIANO TILES GAME*");
+     	gtk_label_set_text(GTK_LABEL(label1), buf2);
 }
 
 void music2()
@@ -111,6 +135,8 @@ void music2()
         g_timeout_add(1000,ddg,0);
 	sprintf(buf, "ppo ppo ppo");
      	gtk_label_set_text(GTK_LABEL(out), buf);
+	sprintf(buf2, "*PIANO TILES GAME*");
+     	gtk_label_set_text(GTK_LABEL(label1), buf2);
 }
 
 void music3()
@@ -125,6 +151,8 @@ void music3()
         g_timeout_add(800,ddg,0);
 	sprintf(buf, "Kartrider");
      	gtk_label_set_text(GTK_LABEL(out), buf);
+	sprintf(buf2, "*PIANO TILES GAME*");
+     	gtk_label_set_text(GTK_LABEL(label1), buf2);
 }
 
 void setAnswer()
